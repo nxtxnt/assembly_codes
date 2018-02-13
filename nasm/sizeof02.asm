@@ -27,14 +27,17 @@ section .text
 ;   get the numerator   
 
      get_numeration:
+        inc bl
         shr eax, 1
         cmp eax, 0
-        je incr
-
-      incr:
-        inc eax
+        jg get_numeration
 
 ;-----------------------
 ;    convert to char
 
+    loop:
+      cmp dl, cl
+      jg
     
+    to_char:
+      mov eax, []
