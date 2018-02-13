@@ -14,30 +14,29 @@ section .text
   
   _start:
   
-  
-;-----------------------
-;convert 
+;-----------------------------------------------------------------------------------------
+;                           EXPRESSING OUR RESULT AS CHAR
 
-    mov eax, [val]
-    mov ebx, eax
-    call get_numeration
-    
+;--------------------------------
+;         get numerator
 
-;-----------------------
-;   get the numerator   
+    init01:
+      mov ax, [random_data_size]  ;we initialize ax with the 
+      
+    get_num:
+      mov bl, -1                  ;bl is initialized at -1 so that if numerator is zero the increment will set it to 0 and not 1
+      div ax, 10                  ;we divide ax by 10 each time, if eax is inferior to 10, bl will end up with null value
+      inc bl
+      cmp eax, 0
+      call write_on_array
+      jg get_num                  ;while eax is greater than 0
 
-     get_numeration:
-        inc bl
-        shr eax, 1
-        cmp eax, 0
-        jg get_numeration
 
-;-----------------------
-;    convert to char
+;--------------------------------
+;     write on char array
 
-    loop:
-      cmp dl, cl
-      jg
-    
-    to_char:
-      mov eax, []
+      write_on_char_array:
+        
+      
+      get_val:
+      
