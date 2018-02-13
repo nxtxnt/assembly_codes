@@ -18,25 +18,28 @@ section .text
 ;                           EXPRESSING OUR RESULT AS CHAR
 
 ;--------------------------------
-;         get numerator
+;         GET NUMERATOR
+                                  ;the numerator is number of times the value can be divided by 10, we will use it to isolate
+                                  ;units, decimal, hundreds, thousands etc.
 
     init01:
       mov ax, [random_data_size]  ;we initialize ax with the 
+      mov bl, ax                  ;bl (our counter) is initialized at random_data_size
       
     get_num:
-      mov bl, -1                  ;bl is initialized at -1 so that if numerator is zero the increment will set it to 0 and not 1
       div ax, 10                  ;we divide ax by 10 each time, if eax is inferior to 10, bl will end up with null value
-      inc bl
-      cmp eax, 0
+      dec bl                      ;bl is first decremented so always inferior to random_data_size
+      cmp ax, 0
       call write_on_array
       jg get_num                  ;while eax is greater than 0
 
 
 ;--------------------------------
-;     write on char array
+;         EXTRACT NUM
+                                  ;here we extract the specefic number we want to extract, since ax is divided by 10 each time
+                                  ;the number we want to extract next is always the last digit
+                                  ;(or first if we count from right to left) 1 2 3 4 <--- last digit
 
-      write_on_char_array:
+        mov cx, bl                ;moving ax's value into cx so we can use it as pointer inside random_data_size_as_chars's
+                                  ;memory address
         
-      
-      get_val:
-      
