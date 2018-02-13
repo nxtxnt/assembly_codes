@@ -56,10 +56,17 @@ section .text
           mov [random_data_size_as_chars+bl], byte cl
 
 ;-------------------------------------------------------------------------------------------
-;                                   PRINT OUR RESULT
+;                                     PRINT OUR RESULT
 
         output:
           mov eax, 4
           mov ebx, 1
           mov ecx, random_data_size_as_chars
           mov edx, size_random_data_size_as_chars
+          
+;-------------------------------------------------------------------------------------------
+;                                          EXIT
+
+        exit:
+          mov eax, 1
+          int 80h
