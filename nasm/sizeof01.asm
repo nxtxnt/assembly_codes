@@ -1,4 +1,6 @@
-;assembly code that outputs a single digit-measurable variable's size
+; --------------------------------------------------------------------------
+;|   assembly code that outputs a single digit-measurable variable's size   |
+; --------------------------------------------------------------------------
 
 section .data
 
