@@ -39,7 +39,12 @@ section .text
                                   ;here we extract the specefic number we want to extract, since ax is divided by 10 each time
                                   ;the number we want to extract next is always the last digit
                                   ;(or first if we count from right to left) 1 2 3 4 <--- last digit
-
-        mov cx, bl                ;moving ax's value into cx so we can use it as pointer inside random_data_size_as_chars's
-                                  ;memory address
-        
+                                  ;ax's value will be used to point the location inside
+                                  ;random_data_size_as_chars's memory address where the digit will be put
+        mov dx, ax
+        div dx, 10                ;123/10 = 12
+        mul dx, 10                ;12*10 = 120
+        mov dx, ax-dx             ;123-120 = 3 we isolated our digit !
+        add dx, 48                ;expressing our digit as a readable character, 48 being the character '0', n+48
+                                  ;will be equal to n as character
+        mov [random_data_size_as_chars+bl], byte dx
