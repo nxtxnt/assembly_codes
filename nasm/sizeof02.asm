@@ -41,10 +41,10 @@ section .text
                                   ;(or first if we count from right to left) 1 2 3 4 <--- last digit
                                   ;ax's value will be used to point the location inside
                                   ;random_data_size_as_chars's memory address where the digit will be put
-        mov dx, ax
-        div dx, 10                ;123/10 = 12
-        mul dx, 10                ;12*10 = 120
-        mov dx, ax-dx             ;123-120 = 3 we isolated our digit !
-        add dx, 48                ;expressing our digit as a readable character, 48 being the character '0', n+48
-                                  ;will be equal to n as character
-        mov [random_data_size_as_chars+bl], byte dx
+        write_on_array:
+          mov dx, ax
+          div dx, 10                ;123/10 = 12
+          mul dx, 10                ;12*10 = 120
+          mov dx, ax-dx             ;123-120 = 3 we isolated our digit !
+          add dx, 48                ;expressing our digit as a readable character, 48 being the character '0'
+          mov [random_data_size_as_chars+bl], byte dx
