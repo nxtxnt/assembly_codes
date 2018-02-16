@@ -1,0 +1,18 @@
+
+
+
+  mov ebx, [value]                    ;value : eg 123
+  mov eax, 10                         ;divisor
+
+  mov edi, ebx                        ;we keep ebx current value for further use : edi --> ebx = 123
+  div ebx                             ;we divide ebx by 10 each time until equal to 0 : ebx(123) --> 12
+  mov esi, edx                        ;we keep aside in esi to use it after then put it back in ebx further : esi --> 12
+  mov ebx, edx                        ;we move edx to ebx for the next division : ebx --> edx = 12
+  cmp edx, 0
+  jg write_on_char_string
+
+  write on_char_string:
+    d
+    mov ebx, edx
+    mul ebx
+    
